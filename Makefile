@@ -46,14 +46,15 @@ PKGS:= gstreamer-1.0 gstreamer-video-1.0 x11 json-glib-1.0
 OBJS:= $(SRCS:.c=.o)
 OBJS+= deepstream_nvdsanalytics_meta.o
 
-CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deepstream-app/ -DDS_VERSION_MINOR=0 -DDS_VERSION_MAJOR=5
+CFLAGS+= -I/opt/nvidia/deepstream/deepstream-5.1/sources/apps/apps-common/includes -I./includes -I/opt/nvidia/deepstream/deepstream-5.1/sources/includes -I/opt/nvidia/deepstream/deepstream-5.1/sources/apps/sample_apps/deepstream-app/ -DDS_VERSION_MINOR=0 -DDS_VERSION_MAJOR=5
 CFLAGS+= -I$(INC_DIR)
-
+CFLAGS+= -I/usr/local/cuda-10.2/include
 
 LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
        -lgstrtspserver-1.0 -ldl -Wl,-rpath,$(LIB_INSTALL_DIR)
 
 CFLAGS+= `pkg-config --cflags $(PKGS)`
+LIBS+= -L/usr/local/cuda-10.2/lib64/ -lcudart -lcuda
 
 LIBS+= `pkg-config --libs $(PKGS)`
 
